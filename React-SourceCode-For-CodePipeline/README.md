@@ -53,7 +53,7 @@ version: 0.0
 os: linux
 files:
   - source: /
-    destination: /home/ec2-user/server
+    destination: /home/ubuntu/server
 hooks:
   AfterInstall:
     - location: afterinstall.sh
@@ -68,7 +68,7 @@ afterinstall.sh
 
 #!/bin/bash
 
-cd /home/ec2-user/server
+cd /home/ubuntu/server
 curl -sL https://rpm.nodesource.com/setup_14.x | sudo -E bash -
 yum -y install nodejs npm
 
@@ -91,7 +91,7 @@ applicationstart.sh
 
 #!/bin/bash
 
-cd /home/ec2-user/server
+cd /home/ubuntu/server
 sudo pm2 delete Frontend
 sudo pm2 start server.js --name Frontend
 
