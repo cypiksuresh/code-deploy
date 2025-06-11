@@ -3,24 +3,30 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      nodejs: 16
-   
+      nodejs: 18
     commands:
-        # install npm
-        - npm install
-       
+      - echo "Installing dependencies..."
+      - npm install
+
+  pre_build:
+    commands:
+      - echo "Running pre-build tasks..."
+      # Add any test/lint steps here if needed
+      # - npm test
+
   build:
     commands:
-        # run build script
-        - npm run-script build
-     
+      - echo "Building application..."
+      # Optional build (if using React/Angular/Vue etc.)
+      # - npm run build
+
+  post_build:
+    commands:
+      - echo "Zipping artifacts for deployment..."
+      - mkdir -p artifact
+      - cp -r * artifact/
+      - zip -r app.zip artifact/
+
 artifacts:
-  # include all files required to run application
-  # notably excluded is node_modules, as this will cause overwrite error on deploy
   files:
-    - public/**/*
-    - src/**/*
-    - package.json
-    - server.js
-    - appspec.yml
-    - scripts/**/*
+    - app.zip
