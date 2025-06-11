@@ -8,3 +8,9 @@ sudo chown ubuntu:ubuntu /home/ubuntu/test-deploy
 
 # Write test log
 echo "✅ Hello from CodeDeploy at $(date)" > /home/ubuntu/test-deploy/deploy_log.txt
+
+# Go to app directory
+cd /home/ubuntu/test-deploy || exit 1
+
+# Start server in background (log output)
+nohup node server.js > server.log 2>&1 &

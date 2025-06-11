@@ -1,10 +1,10 @@
-// server.js
 const http = require('http');
-const port = 3000;
 
-http.createServer((req, res) => {
+const server = http.createServer((req, res) => {
   res.writeHead(200, { 'Content-Type': 'text/plain' });
-  res.end('✅ Hello from deployed app!\n');
-}).listen(port, () => {
-  console.log(`Server running at http://localhost:${port}`);
+  res.end('Hello World from EC2\n');
+});
+
+server.listen(3000, () => {
+  console.log('Server running at http://localhost:3000');
 });
