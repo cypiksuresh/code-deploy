@@ -6,4 +6,4 @@ sudo apt update -y
 sudo apt upgrade -y
 
 echo "Removing old app..."
-rm -rf /home/ubuntu/app
+sudo rm -rf /home/ubuntu/app/*
