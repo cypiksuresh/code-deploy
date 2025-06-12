@@ -2,7 +2,7 @@
 
 echo "PATH=$PATH"
 
-# Make sure directory exists and owned by ubuntu
+# Make sure test-deploy directory exists and is owned by ubuntu
 sudo mkdir -p /home/ubuntu/test-deploy
 sudo chown ubuntu:ubuntu /home/ubuntu/test-deploy
 
@@ -10,7 +10,11 @@ sudo chown ubuntu:ubuntu /home/ubuntu/test-deploy
 echo "✅ Hello from CodeDeploy at $(date)" > /home/ubuntu/test-deploy/deploy_log.txt
 
 # Go to app directory
-cd /home/ubuntu/test-deploy || exit 1
+cd /home/ubuntu/server || exit 1
 
-# Start server in background (log output)
-nohup node server.js > server.log 2>&1 &
+# Install node dependencies
+npm install
+
+# Start app with PM2
+pm2 delete Frontend || true
+pm2 start server.js --name Frontend
